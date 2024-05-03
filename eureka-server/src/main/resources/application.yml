@@ -1,0 +1,24 @@
+# 端口号
+server:
+  port: 8761
+# 配置注册服务中心
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  # 配置关闭自我保护，并按需配置Eureka Server清理无效节点的时间间隔。生产环境不建议关闭
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 6000
+    peer-node-read-timeout-ms: 90000
+    response-cache-update-interval-ms: 5000
+  client:
+    # 表明自己不是一个客户端，并且不进行自注册
+    register-with-eureka: false
+    fetch-registry: false
+    # 注册中心的访问地址
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+# 配置应用程序名称
+spring:
+  application:
+    name: cloud-eureka
